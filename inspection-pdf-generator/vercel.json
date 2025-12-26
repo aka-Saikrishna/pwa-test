@@ -4,12 +4,19 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "."
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server.js"
+      "dest": "/server.js"
     },
     {
       "src": "/sw.js",
@@ -27,14 +34,12 @@
       }
     },
     {
-      "src": "/(.*)",
+      "src": "/",
+      "dest": "/app.html"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|json|html))",
       "dest": "/$1"
     }
-  ],
-  "functions": {
-    "server.js": {
-      "memory": 3008,
-      "maxDuration": 60
-    }
-  }
+  ]
 }
